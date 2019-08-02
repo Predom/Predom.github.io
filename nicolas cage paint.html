@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Bolinha Material</title>
+		
+	</head>
+	
+	<style>
+		body{
+			background-image: url("file:///D:/Predom.github.io/imagens/W%20XP%20LOGO.jpg")
+		}
+		#muhCanvas{
+			border: 2px solid rgb(0,0,0);
+			position:absolute;
+			top: 100px;
+			left: 300px;
+		}
+		#titulo{
+			background-color: rgb(150,50,0);
+			border: 5px solid rgb(0,0,0);
+			width: 500px;
+			position:absolute;
+			top: 700px;
+			left: 300px;
+		}
+		
+	</style>
+	
+	<body>
+		
+		<canvas id="muhCanvas"></canvas>
+		<h1 id="titulo">Bolinha fisica que interage com o mouse</h1>
+		
+		
+	</body>
+	
+	<script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script>
+	
+	<script>
+		
+		var programCode = function(processingInstance){
+			with (processingInstance){
+			size(500,500);
+			frameRate(30);
+			
+			    
+				var ellipseX = width/2;
+				var ellipseY = height/2;
+				var ellipseY_var =0;
+				var ellipseX_var =0;
+				
+				draw = function (){
+				
+					background(255,255,255);
+					fill(255, 247, 0);
+					ellipse(ellipseX,ellipseY,20,20);
+					
+					//atualiza as velocidades da bolinha
+					ellipseY += ellipseY_var;
+					ellipseX += ellipseX_var;
+					
+					//basicamente a gravidade
+					ellipseY_var +=1;
+					
+					if(ellipseY>height) ellipseY_var = -ellipseY_var;
+					
+					if(mouseY<ellipseY+20 && mouseY>ellipseY-20 && mouseX<ellipseX+20 && mouseX>ellipseX-20 && mouseIsPressed){
+						ellipseY_var =0;
+						ellipseX_var =0;
+						ellipseY = mouseY;
+						ellipseX = mouseX;
+					}
+					mouseMemY=mouseY;
+					mouseMemX=mouseX;
+			};
+			
+		}};
+		
+		
+		var canvas = document.getElementById("muhCanvas"); 
+		
+		var processingInstance = new Processing(canvas, programCode); 
+	</script>
+</html>
