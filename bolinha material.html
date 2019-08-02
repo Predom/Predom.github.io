@@ -43,13 +43,14 @@
 		var programCode = function(processingInstance){
 			with (processingInstance){
 			size(500,500);
-			frameRate(30);
+			frameRate(60);
 			
 			    
 				var ellipseX = width/2;
 				var ellipseY = height/2;
 				var ellipseY_var =0;
 				var ellipseX_var =0;
+				var velTot=0;
 				
 				draw = function (){
 				
@@ -62,15 +63,29 @@
 					ellipseX += ellipseX_var;
 					
 					//basicamente a gravidade
-					ellipseY_var +=1;
+					ellipseY_var +=0.5;
 					
-					if(ellipseY>height) ellipseY_var = -ellipseY_var;
+					//chão e paredes
+					if(ellipseY>height-10) ellipseY_var = -ellipseY_var*0.8;
+					if(ellipseX>width) ellipseX_var = -ellipseX_var*0.8;
+					if(ellipseX<0) ellipseX_var = -ellipseX_var*0.8;
 					
-					if(mouseY<ellipseY+20 && mouseY>ellipseY-20 && mouseX<ellipseX+20 && mouseX>ellipseX-20 && mouseIsPressed){
+					
+					
+					mouseDragged = function(){
+					if(mouseY<ellipseY+10 && mouseY>ellipseY-10 && mouseX<ellipseX+10 && mouseX>ellipseX-10){
 						ellipseY_var =0;
 						ellipseX_var =0;
 						ellipseY = mouseY;
 						ellipseX = mouseX;
+					}
+					}
+					mouseReleased = function(){
+					
+						ellipseY_var = (mouseY-mouseMemY);
+						ellipseX_var = (mouseX-mouseMemX);
+						
+						
 					}
 					mouseMemY=mouseY;
 					mouseMemX=mouseX;
