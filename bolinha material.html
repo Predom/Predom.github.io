@@ -51,6 +51,8 @@
 				var ellipseY_var =0;
 				var ellipseX_var =0;
 				var velTot=0;
+				var mouseIsPressed = false;
+				var bolinhaIsDragged = false;
 				
 				draw = function (){
 				
@@ -62,34 +64,48 @@
 					ellipseY += ellipseY_var;
 					ellipseX += ellipseX_var;
 					
-					//basicamente a gravidade
+					//basicamente a gravidade e a normal do chão
 					ellipseY_var +=0.5;
+					if(ellipseY>height-10)ellipseY_var -=0.5;
 					
 					//chão e paredes
-					if(ellipseY>height-10) ellipseY_var = -ellipseY_var*0.8;
-					if(ellipseX>width) ellipseX_var = -ellipseX_var*0.8;
-					if(ellipseX<0) ellipseX_var = -ellipseX_var*0.8;
+					if(ellipseY>height-10 && ellipseY_var>0){
+						ellipseY_var = -ellipseY_var*0.8;
+						ellipseY=height-10;
+					}
+					if(ellipseY>height-10){
+						ellipseY=height-10;
+					}
+					if(ellipseX>width-10 && ellipseX_var>0) ellipseX_var = -ellipseX_var*0.8;
+					if(ellipseX<10 && ellipseX_var<0) ellipseX_var = -ellipseX_var*0.8;
 					
-					
-					
-					mouseDragged = function(){
-					if(mouseY<ellipseY+10 && mouseY>ellipseY-10 && mouseX<ellipseX+10 && mouseX>ellipseX-10){
+					mousePressed = function(){
+						mouseIsPressed = true;
+					}
+					if(mouseIsPressed){
+						if((mouseY<ellipseY+10 && mouseY>ellipseY-10 && mouseX<ellipseX+10 && mouseX>ellipseX-10)||bolinhaIsDragged){
 						ellipseY_var =0;
 						ellipseX_var =0;
 						ellipseY = mouseY;
 						ellipseX = mouseX;
+						bolinhaIsDragged=true;
+						}
 					}
-					}
-					mouseReleased = function(){
 					
+					mouseReleased = function(){
 						ellipseY_var = (mouseY-mouseMemY);
 						ellipseX_var = (mouseX-mouseMemX);
-						
-						
+						mouseIsPressed=false;
+						bolinhaIsDragged=false;
 					}
 					mouseMemY=mouseY;
 					mouseMemX=mouseX;
-			};
+					
+					
+				};
+				
+			
+			
 			
 		}};
 		
