@@ -34,7 +34,7 @@
 
 	headerSrc.onload = function() {
 		if(this.status == 200){
-			header.innerHTML = xhr.responseText;
+			header.innerHTML = headerSrc.responseText;
 		}else{
 			console.log("algo de errado no carregamento do cabeçalho");
 		}
