@@ -1,3 +1,9 @@
+:root{
+  --headerBack: #41526f;
+  --minLarg: 560px;
+}
+
+
 *{
   margin: 0;
   padding: 0;
@@ -6,13 +12,15 @@
   text-decoration: none;
 
 }
+body{
+ overflow-x: hidden;
+}
 
 /*------------CSS da header----------------*/
 header{
   width: 100%;
   height: 80px;
-  background: #f7df1e;
-  border-bottom: 2px solid rgb(139, 139, 139);
+  background: var(--headerBack);
   position:relative;
   display: block;
   top: 0;
@@ -20,14 +28,41 @@ header{
 header a{
     color: black;
 }
+#outerHeader{
+  z-index: 3;
+  height: 100%;
+  transform: rotate(-2deg);
+}
 #innerHeader{
   position:sticky;
   height: 50px;
   top: 10px;
-  background-color: #f7df1e;
-  min-width: 560px;
+  background-color: var(--headerBack);
+  min-width: var(--minLarg);
   text-align: center;
-
+  transform: rotate(2deg);
+  z-index: 10;
+}
+#borderHead1{
+  background-color: var(--headerBack);
+  width:105%;
+  left: -2.5%;
+  top:-10px;
+  height: 50px;
+  box-shadow: 0px 5px 10px rgb(84, 84, 84);
+  position: relative;
+  z-index: 5;
+}
+#borderHead2{
+  background-color: white;
+  height: 50px;
+  width:105%;
+  top:-30px;
+  left: -2.5%;
+  transform: rotate(1deg);
+  position: relative;
+  z-index: 2;
+  border-bottom: 2px solid rgb(84, 84, 84);
 }
 #headerContainer{
     text-align: left;
@@ -63,7 +98,19 @@ header a{
   border:none;
 }
 #navegacao li:hover{
-  background-color: #f5e77a;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*-----------CSS do section-------------------*/
+section{
+  display: block;
+}
+section .sectionContainer{
+  max-width: 1500px;
+  display: block;
+  margin:0 auto;
+  padding-top: 50px;
+  height: 100%;
 }
 
 /*------------CSS da footer----------------*/
